@@ -58,8 +58,27 @@
 <div class="line line5"></div>
 
 
+<audio id="bg-music" preload="auto">
+  <source src="./audio/Dragon Ball Z - Chala Head Chala (opening Latino) Full HD 1080p.mp3" type="audio/mpeg">
+</audio>
 
+<script>
+  const audio = document.getElementById("bg-music");
+  let started = false;
 
+  function startMusic() {
+    if (started) return;
+    audio.volume = 0.6;
+    audio.play().catch(() => {});
+    started = true;
+
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+  }
+
+  document.addEventListener("click", startMusic);
+  document.addEventListener("touchstart", startMusic);
+</script>
 </body>
 </html>
     
