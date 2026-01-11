@@ -9,7 +9,7 @@
 
     <title>¡¡¡Feliz Cumpleaños Fran!!!</title>
 </head>
-<body>
+<body onclick="playAudio()">
     
 
 <div class="birthday-banner">
@@ -61,26 +61,26 @@
 
 
 <audio id="bg-music" preload="auto">
-  <source src="./audio/Dragon Ball Z - Chala Head Chala (opening Latino) Full HD 1080p.mp3" type="audio/mpeg">
-</audio>
+      <source src="./audio/Dragon Ball Z - Chala Head Chala (opening Latino) Full HD 1080p.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
 
 <script>
-  const audio = document.getElementById("bg-music");
-  let started = false;
+        function playAudio() {
+            let audio = document.getElementById('bg-music');
+            
+            // play() devuelve una "promesa", es mejor manejarla por si el navegador bloquea el audio
+            audio.play().then(() => {
+                console.log("Reproduciendo...");
+            }).catch(error => {
+                console.log("Error al reproducir: ", error);
+            });
 
-  function startMusic() {
-    if (started) return;
-    audio.volume = 0.6;
-    audio.play().catch(() => {});
-    started = true;
+            // Opcional: Quitar el evento después del primer clic para no reiniciar el audio
+            document.body.removeAttribute('onclick');
+        }
+    </script>
 
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("touchstart", startMusic);
-  }
-
-  document.addEventListener("click", startMusic);
-  document.addEventListener("touchstart", startMusic);
-</script>
 </body>
 </html>
     
